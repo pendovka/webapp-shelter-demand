@@ -21,7 +21,6 @@ ChartJS.register(
   PointElement,
   LinearScale,
   Title,
-
   Tooltip,
   Legend,
   CategoryScale,
@@ -36,7 +35,7 @@ type PredictionsResult = {
   predictions: number[];
   dates: string[];
   actual_values: number[];
-  comparison: {mae_comparison: number, mae_last_observation: number, mae_sarimax: number}
+  comparison: { mae_comparison: number, mae_last_observation: number, mae_sarimax: number }
 };
 
 export default function Home() {
@@ -115,12 +114,12 @@ export default function Home() {
   };
 
   return (
-    <div>
-    {JSON.stringify(mae)}
-    <div style={{ width: "60%", height: "400px", position: "relative" }}>
-      <Line data={chartData} options={options} />
-      
-    </div>
+    <div style={{ padding: "10px" }}>
+      {JSON.stringify(mae)}
+      <div style={{ width: "100%", height: "400px", maxWidth: "1000px", margin: "0 auto", position: "relative" }}>
+        <Line data={chartData} options={options} />
+      </div>
     </div>
   );
 }
+
