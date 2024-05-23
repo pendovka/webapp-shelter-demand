@@ -116,11 +116,11 @@ export default function Home() {
 
   return (
     <div>
+    {JSON.stringify(mae)}
     <div style={{ width: "60%", height: "400px", position: "relative" }}>
       <Line data={chartData} options={options} />
       
     </div>
-    {JSON.stringify(mae)}
     </div>
   );
 }
