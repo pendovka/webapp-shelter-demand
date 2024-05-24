@@ -1,4 +1,5 @@
 "use client";
+import styled from 'styled-components';
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
@@ -38,6 +39,24 @@ type PredictionsResult = {
   comparison: { mae_comparison: number, mae_last_observation: number, mae_sarimax: number }
 };
 
+const Container = styled.div`
+  background-color: grey;
+  min-height: 100vh;
+  padding: 10px;
+`;
+
+const ChartContainer = styled.div`
+  width: 100%;
+  height: 400px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  background-color: white; /* Optional: set a background color for the chart container */
+  padding: 20px; /* Optional: add some padding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add a shadow */
+  border-radius: 8px; /* Optional: add rounded corners */
+`;
+
 export default function Home() {
   const [predictionsResponse, setPredictionsResponse] = useState<{
     result: PredictionsResult;
@@ -73,9 +92,9 @@ export default function Home() {
       {
         label: "Actual Values",
         data: actualValues,
-        borderColor: "rgba(75, 192, 192, 1)",
-        backgroundColor: "rgba(75, 192, 192, 0)", // No fill color
-        fill: false, // Disable fill
+        borderColor: "rgba(75, 192, 192, 231)",
+        backgroundColor: "rgba(4, 112, 112, 0)", // No fill color
+        fill: true, 
         tension: 0.1,
       },
       {
@@ -83,7 +102,7 @@ export default function Home() {
         data: predictions,
         borderColor: "rgba(192, 75, 75, 1)",
         backgroundColor: "rgba(192, 75, 75, 0)", // No fill color
-        fill: false, // Disable fill
+        fill: true, 
         tension: 0.1,
       },
     ],
@@ -114,12 +133,13 @@ export default function Home() {
   };
 
   return (
-    <div style={{ padding: "10px" }}>
+    <Container>
       {JSON.stringify(mae)}
-      <div style={{ width: "100%", height: "400px", maxWidth: "1000px", margin: "0 auto", position: "relative" }}>
+      <ChartContainer>
         <Line data={chartData} options={options} />
-      </div>
-    </div>
+      </ChartContainer>
+    </Container>
   );
 }
+
 
