@@ -141,11 +141,14 @@ export default function Home() {
   return (
     <Container>
     <div>
-  This chart shows the daily number of people not matched to a shelter space for overnight stay in Toronto.<br />
-  It compares actual values to predictions made by a SARIMAX model, which forecasts on a daily rolling window.<br />
-  The model considers historical values, seasonality, weather effects, and occupancy rates.<br />
+  This chart displays the daily number of people in Toronto who were not matched to a shelter space for an overnight stay.<br />
+  It compares actual values to predictions made by a SARIMAX model, which forecasts using a daily rolling window.<br />
+  The model takes into account historical data, seasonality, weather effects, and occupancy rates.<br />
   For more details, see the <StyledLink href="https://github.com/pendovka/Toronto-Shelter-Traffic/blob/main/Shelter-Demand-Predictor.ipynb" target="_blank" rel="noopener noreferrer">Jupyter notebook</StyledLink>.<br />
-  The chart updates automatically every month with new data from the Toronto Open Data page.
+  The chart updates automatically on the 16th of every month with new data from the Toronto Open Data page.<br />
+  Due to a delay in data release, this model cannot be used to predict future values but can only be evaluated retroactively.
+ 
+
 </div>
       <ChartContainer>
         <Line data={chartData} options={options} />
