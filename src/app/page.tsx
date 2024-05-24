@@ -147,8 +147,6 @@ export default function Home() {
   For more details, see the <StyledLink href="https://github.com/pendovka/Toronto-Shelter-Traffic/blob/main/Shelter-Demand-Predictor.ipynb" target="_blank" rel="noopener noreferrer">Jupyter notebook</StyledLink>.<br />
   The chart updates automatically on the 16th of every month with new data from the Toronto Open Data page.<br />
   Due to a delay in data release, this model cannot be used to predict future values but can only be evaluated retroactively.
- 
-
 </div>
       <ChartContainer>
         <Line data={chartData} options={options} />
