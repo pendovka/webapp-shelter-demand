@@ -57,6 +57,11 @@ const ChartContainer = styled.div`
   border-radius: 8px; /* Optional: add rounded corners */
 `;
 
+const StyledLink = styled.a`
+  text-decoration: underline;
+  color: blue;
+`;
+
 export default function Home() {
   const [predictionsResponse, setPredictionsResponse] = useState<{
     result: PredictionsResult;
@@ -84,6 +89,7 @@ export default function Home() {
   const dates = predictionsResponse.result.dates.map((date) => new Date(date));
   const actualValues = predictionsResponse.result.actual_values;
   const predictions = predictionsResponse.result.predictions;
+
   const mae = predictionsResponse.result.comparison;
 
   const chartData = {
@@ -134,10 +140,19 @@ export default function Home() {
 
   return (
     <Container>
-      {JSON.stringify(mae)}
+    <div>
+  This chart shows the daily number of people not matched to a shelter space for overnight stay in Toronto.<br />
+  It compares actual values to predictions made by a SARIMAX model, which forecasts on a daily rolling window.<br />
+  The model considers historical values, seasonality, weather effects, and occupancy rates.<br />
+  For more details, see the <StyledLink href="https://github.com/pendovka/Toronto-Shelter-Traffic/blob/main/Shelter-Demand-Predictor.ipynb" target="_blank" rel="noopener noreferrer">Jupyter notebook</StyledLink>.<br />
+  The chart updates automatically every month with new data from the Toronto Open Data page.
+</div>
       <ChartContainer>
         <Line data={chartData} options={options} />
       </ChartContainer>
+      <div>The SARIMAX model has a Mean Absolute Error of 21.96.</div>
+      <div>Using the last observation as a forecast results in a Mean Absolute Error of 24.65.</div>
+      <div>This shows an improvement of 10.91% compared to the last observation method.</div>
     </Container>
   );
 }
