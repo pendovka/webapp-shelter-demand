@@ -4,7 +4,7 @@ import { useState } from 'react';
 import PredictionsChart from './components/PredictionsChart';
 
 const Container = styled.div`
-  background-color: grey;
+  background-color: rgba(0, 0, 0, 0.15);
   min-height: 100vh;
   padding: 10px;
 `;

@@ -34,21 +34,6 @@ interface PredictionsChartProps {
   setLastCompletedOn: (date: string) => void;
 }
 
-// Define the structure for your PredictionsResponse here
-interface PredictionsResponse {
-  result: {
-    predictions: number[];
-    dates: string[];
-    actual_values: number[];
-    comparison: {
-      mae_comparison: number;
-      mae_last_observation: number;
-      mae_sarimax: number;
-    };
-  };
-  completed_on: string;
-}
-
 export default function PredictionsChart({ setComparisonData, setLastCompletedOn }: PredictionsChartProps) {
   const [predictionsResponse, setPredictionsResponse] = useState<PredictionsResponse | null>(null);
 
@@ -78,7 +63,7 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
     return <div>Loading...</div>;
   }
 
-  const { dates, actual_values: actualValues, predictions, comparison } = predictionsResponse?.result || { dates: [], actual_values: [], predictions: [], comparison: null };
+  const { dates, actual_values: actualValues, predictions, comparison } = predictionsResponse.result;
 
   const ChartContainer = styled.div`
   width: 100%;
@@ -99,16 +84,12 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
         label: "Actual Values",
         data: actualValues,
         borderColor: "rgba(75, 192, 192, 1)",
-        backgroundColor: "rgba(75, 192, 192, 0.1)", // Light fill color
-        fill: true,
         tension: 0.1,
       },
       {
         label: "Predicted Values",
         data: predictions,
         borderColor: "rgba(192, 75, 75, 1)",
-        backgroundColor: "rgba(192, 75, 75, 0.1)", // Light fill color
-        fill: true,
         tension: 0.1,
       },
     ],
@@ -130,7 +111,7 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
         beginAtZero: true,
         title: {
           display: true,
-          text: "Values",
+          text: "Number of unmatched callers",
         },
       },
     },
@@ -140,7 +121,7 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
 
   return (
     <ChartContainer>
-      <p>Last updated on: {new Date(predictionsResponse.completed_on).toLocaleString()}</p>
+    <p style={{ color: 'black' }}>Last updated on: {new Date(predictionsResponse?.completed_on).toLocaleString()}</p>
       <Line data={chartData} options={options} />
     </ChartContainer>
   );  
