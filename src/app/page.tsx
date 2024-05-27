@@ -35,8 +35,7 @@ export default function Home() {
         The model takes into account historical data, weather effects, and shelter occupancy rates.<br />
         For more details, see the <StyledLink href="https://github.com/pendovka/Toronto-Shelter-Traffic/blob/main/Shelter-Demand-Predictor.ipynb" target="_blank" rel="noopener noreferrer">Jupyter notebook</StyledLink>.<br />  <br />
         New data is released monthly and will be available here once it is published by the Toronto Open Data page. <br />
-        Due to a delay in data release, this model can only be evaluated retroactively. <br />
-        Last updated on: {lastCompletedOn}. <br />  <br />
+        Due to a delay in data release, this model can only be evaluated retroactively. <br />  <br />
       </div>
       <PredictionsChart setComparisonData={setComparisonData} setLastCompletedOn={setLastCompletedOn} />
       <br />

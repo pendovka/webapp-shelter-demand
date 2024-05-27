@@ -71,14 +71,14 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
         });
     }, 2000);
 
-    return () => clearInterval(interval); // Cleanup on component unmount
+    return () => clearInterval(interval); 
   }, []);
 
   if (predictionsResponse === null) {
     return <div>Loading...</div>;
   }
 
-  const { dates, actual_values: actualValues, predictions, comparison } = predictionsResponse.result;
+  const { dates, actual_values: actualValues, predictions, comparison } = predictionsResponse?.result || { dates: [], actual_values: [], predictions: [], comparison: null };
 
   const ChartContainer = styled.div`
   width: 100%;
@@ -140,7 +140,7 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
 
   return (
     <ChartContainer>
-      <p>Updated on: {new Date(predictionsResponse.completed_on).toLocaleString()}</p>
+      <p>Last updated on: {new Date(predictionsResponse.completed_on).toLocaleString()}</p>
       <Line data={chartData} options={options} />
     </ChartContainer>
   );  
