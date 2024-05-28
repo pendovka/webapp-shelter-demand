@@ -16,6 +16,7 @@ import {
   ChartOptions,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
+import { usePredictionsData } from "../hooks";
 
 ChartJS.register(
   LineElement,
@@ -29,55 +30,15 @@ ChartJS.register(
   Filler,
 );
 
-interface PredictionsChartProps {
-  setComparisonData: (data: { mae_comparison: number, mae_last_observation: number, mae_sarimax: number }) => void;
-  setLastCompletedOn: (date: string) => void;
-}
+export default function PredictionsChart() {
 
-interface PredictionsResponse {
-  result: {
-    dates: string[];
-    actual_values: number[];
-    predictions: number[];
-    comparison: {
-      mae_comparison: number;
-      mae_last_observation: number;
-      mae_sarimax: number;
-    };
-    completed_on: string;
-  };
-}
-
-export default function PredictionsChart({ setComparisonData, setLastCompletedOn }: PredictionsChartProps) {
-  const [predictionsResponse, setPredictionsResponse] = useState<PredictionsResponse | null>(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetch("https://shelter-traffic-predictor-a506428a4d8d.herokuapp.com/get_predictions")
-        .then(response => {
-          if (response.ok) return response.json();
-          throw new Error('Failed to fetch');
-        })
-        .then(data => {
-          setPredictionsResponse(data);
-          setComparisonData(data.result.comparison);
-          setLastCompletedOn(new Date(data.completed_on).toLocaleString());
-          clearInterval(interval);
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-          clearInterval(interval);
-        });
-    }, 2000);
-
-    return () => clearInterval(interval); 
-  }, [setComparisonData, setLastCompletedOn]);
+  const predictionsResponse = usePredictionsData();
 
   if (predictionsResponse === null) {
     return <div>Loading...</div>;
   }
 
-  const { dates, actual_values: actualValues, predictions, comparison } = predictionsResponse.result;
+  const { dates, actual_values: actualValues, predictions } = predictionsResponse.result;
 
   const ChartContainer = styled.div`
   width: 100%;
@@ -135,7 +96,7 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
 
   return (
     <ChartContainer>
-    <p style={{ color: 'black' }}>Last updated on: {new Date(predictionsResponse?.result.completed_on).toLocaleString()}</p>
+    <p style={{ color: 'black' }}>Last updated on: {new Date (predictionsResponse.completed_on).toLocaleString('fr-fr')}</p>
       <Line data={chartData} options={options} />
     </ChartContainer>
   );  

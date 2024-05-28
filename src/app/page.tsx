@@ -1,10 +1,10 @@
 "use client";
 import styled from 'styled-components';
-import { useState } from 'react';
 import PredictionsChart from './components/PredictionsChart';
+import { usePredictionsData } from './hooks';
 
 const Container = styled.div`
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.1);
   min-height: 100vh;
   padding: 10px;
 `;
@@ -15,17 +15,11 @@ const StyledLink = styled.a`
 `;
 
 export default function Home() {
-  const [comparisonData, setComparisonData] = useState<{
-    mae_last_observation: number | null,
-    mae_sarimax: number | null,
-    mae_comparison: number | null
-  }>({
-    mae_last_observation: null,
-    mae_sarimax: null,
-    mae_comparison: null,
-  });
+  const predictionsResponse = usePredictionsData();
 
-  const [lastCompletedOn, setLastCompletedOn] = useState('');
+  if (predictionsResponse === null) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Container>
@@ -37,11 +31,11 @@ export default function Home() {
         New data is released monthly and will be available here once it is published by the Toronto Open Data page. <br />
         Due to a delay in data release, this model can only be evaluated retroactively. <br />  <br />
       </div>
-      <PredictionsChart setComparisonData={setComparisonData} setLastCompletedOn={setLastCompletedOn} />
+      <PredictionsChart />
       <br />
-      <div>The SARIMAX model has a Mean Absolute Error of {comparisonData.mae_sarimax}.</div>
-      <div>Using the last observation as a forecast results in a Mean Absolute Error of {comparisonData.mae_last_observation}.</div>
-      <div>This shows an improvement of {comparisonData.mae_comparison}% compared to the last observation method.</div>
+      <div> The SARIMAX model has a Mean Absolute Error of {predictionsResponse.result.comparison.mae_sarimax}.</div>
+      <div>Using the last observation as a forecast results in a Mean Absolute Error of {predictionsResponse.result.comparison.mae_last_observation}.</div>
+      <div>This shows an improvement of {predictionsResponse.result.comparison.mae_comparison}% compared to the last observation method.</div>
     </Container>
   );
 }
