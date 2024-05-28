@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { Line } from "react-chartjs-2";
 import {
@@ -34,6 +34,20 @@ interface PredictionsChartProps {
   setLastCompletedOn: (date: string) => void;
 }
 
+interface PredictionsResponse {
+  result: {
+    dates: string[];
+    actual_values: number[];
+    predictions: number[];
+    comparison: {
+      mae_comparison: number;
+      mae_last_observation: number;
+      mae_sarimax: number;
+    };
+    completed_on: string;
+  };
+}
+
 export default function PredictionsChart({ setComparisonData, setLastCompletedOn }: PredictionsChartProps) {
   const [predictionsResponse, setPredictionsResponse] = useState<PredictionsResponse | null>(null);
 
@@ -57,7 +71,7 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
     }, 2000);
 
     return () => clearInterval(interval); 
-  }, []);
+  }, [setComparisonData, setLastCompletedOn]);
 
   if (predictionsResponse === null) {
     return <div>Loading...</div>;
@@ -126,3 +140,4 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
     </ChartContainer>
   );  
 }
+
