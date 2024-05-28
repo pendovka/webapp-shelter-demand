@@ -4,7 +4,7 @@ import PredictionsChart from './components/PredictionsChart';
 import { usePredictionsData } from './hooks';
 
 const Container = styled.div`
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #f0f0f0;
   min-height: 50;
   padding: 75px;
   display: flex;
@@ -14,7 +14,9 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  font-family: Arial, sans-serif; // Standard font choice
+  font-family: 'Lora', 'Merriweather', 'Playfair Display', "Helvetica Neue";
+  font-size: 18x;
+  color: #000; // Set text color to black
   margin: 10px auto;
   max-width: 750px; // Adjust this value to match the desired width
   width: 100%; // Ensure it takes full available width up to the max-width
