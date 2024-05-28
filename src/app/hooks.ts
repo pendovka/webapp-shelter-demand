@@ -18,8 +18,7 @@ export const usePredictionsData = () => {
   const [predictionsResponse, setPredictionsResponse] =
     useState<PredictionsResponse | null>(null);
 
-  // Fetch data every two seconds untill received 2000 
-  useEffect(() => {
+    useEffect(() => {
     const fetchPredictions = async () => {
       const response = await fetch(
         "https://shelter-traffic-predictor-a506428a4d8d.herokuapp.com/get_predictions",

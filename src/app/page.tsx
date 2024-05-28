@@ -5,8 +5,21 @@ import { usePredictionsData } from './hooks';
 
 const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
-  min-height: 100vh;
-  padding: 10px;
+  min-height: 50;
+  padding: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Content = styled.div`
+  font-family: Arial, sans-serif; // Standard font choice
+  margin: 10px auto;
+  max-width: 750px; // Adjust this value to match the desired width
+  width: 100%; // Ensure it takes full available width up to the max-width
+  text-align: left; // Text alignment set to left
+  padding: 0 20px; // Padding to avoid text touching the container edges
 `;
 
 const StyledLink = styled.a`
@@ -23,19 +36,20 @@ export default function Home() {
 
   return (
     <Container>
-      <div>
-        This chart displays the daily number of people in Toronto who were not matched to a shelter space for an overnight stay.<br />
-        It compares actual values to predictions made by a SARIMAX model, which forecasts using a daily rolling window.<br />
-        The model takes into account historical data, weather effects, and shelter occupancy rates.<br />
-        For more details, see the <StyledLink href="https://github.com/pendovka/Toronto-Shelter-Traffic/blob/main/Shelter-Demand-Predictor.ipynb" target="_blank" rel="noopener noreferrer">Jupyter notebook</StyledLink>.<br />  <br />
-        New data is released monthly and will be available here once it is published by the Toronto Open Data page. <br />
-        Due to a delay in data release, this model can only be evaluated retroactively. <br />  <br />
-      </div>
+      <Content>
+        This chart displays the daily number of people in Toronto who were not matched to a shelter space for an overnight stay.
+        It compares actual values to predictions made by a SARIMAX model, which forecasts using a daily rolling window. 
+        The model takes into account historical data, weather effects, and shelter occupancy rates.<br /><br />
+        Due to a delay in data release, this model can only be evaluated retroactively. <br /><br />
+      </Content>
       <PredictionsChart />
-      <br />
-      <div> The SARIMAX model has a Mean Absolute Error of {predictionsResponse.result.comparison.mae_sarimax}.</div>
-      <div>Using the last observation as a forecast results in a Mean Absolute Error of {predictionsResponse.result.comparison.mae_last_observation}.</div>
-      <div>This shows an improvement of {predictionsResponse.result.comparison.mae_comparison}% compared to the last observation method.</div>
+      <Content>
+      <br /><br />
+        <div>The SARIMAX model has a Mean Absolute Error of {predictionsResponse.result.comparison.mae_sarimax}.</div>
+        <div>Using the last observation as a forecast results in a Mean Absolute Error of {predictionsResponse.result.comparison.mae_last_observation}.</div>
+        <div>This shows an improvement of {predictionsResponse.result.comparison.mae_comparison}% compared to the last observation method.</div><br />
+        For more details, see the <StyledLink href="https://github.com/pendovka/Toronto-Shelter-Traffic/blob/main/Shelter-Demand-Predictor.ipynb" target="_blank" rel="noopener noreferrer">Jupyter notebook</StyledLink>.<br /><br />
+      </Content>
     </Container>
   );
 }
