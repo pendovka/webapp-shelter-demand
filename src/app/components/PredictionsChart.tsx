@@ -1,5 +1,4 @@
-"use client";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Line } from "react-chartjs-2";
 import {
@@ -13,10 +12,22 @@ import {
   CategoryScale,
   TimeScale,
   Filler,
-  ChartOptions,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 import { usePredictionsData } from "../hooks";
+
+// Define styled components outside of the component function
+const ChartContainer = styled.div`
+  width: 100%;
+  height: 400px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+`;
 
 ChartJS.register(
   LineElement,
@@ -31,7 +42,6 @@ ChartJS.register(
 );
 
 export default function PredictionsChart() {
-
   const predictionsResponse = usePredictionsData();
 
   if (predictionsResponse === null) {
@@ -39,18 +49,6 @@ export default function PredictionsChart() {
   }
 
   const { dates, actual_values: actualValues, predictions } = predictionsResponse.result;
-
-  const ChartContainer = styled.div`
-  width: 100%;
-  height: 400px;
-  max-width: 1000px;
-  margin: 0 auto;
-  position: relative;
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-`;
 
   const chartData = {
     labels: dates.map(date => new Date(date)),
@@ -70,35 +68,33 @@ export default function PredictionsChart() {
     ],
   };
 
-  const options: ChartOptions<"line"> = {
-    scales: {
-      x: {
-        type: "time",
-        time: {
-          unit: "day",
-        },
-        title: {
-          display: true,
-          text: "Date",
-        },
-      },
-      y: {
-        beginAtZero: true,
-        title: {
-          display: true,
-          text: "Number of unmatched callers",
-        },
-      },
-    },
+  const options = {
     responsive: true,
     maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        align: 'end',
+        labels: {
+          boxWidth: 20,
+          usePointStyle: true,
+          padding: 5,
+          font: {
+            size: 12
+          }
+        }
+      },
+      title: {
+        display: true,
+        text: 'Number of unmatched callers',
+      },
+    },
   };
 
   return (
     <ChartContainer>
-    <p style={{ color: 'black' }}>Last updated on: {new Date (predictionsResponse.completed_on).toLocaleString('fr-fr')}</p>
+      <p style={{ color: 'black' }}>Last updated on: {new Date(predictionsResponse.completed_on).toLocaleString('fr-fr')}</p>
       <Line data={chartData} options={options} />
     </ChartContainer>
-  );  
+  );
 }
-
