@@ -135,7 +135,7 @@ export default function PredictionsChart({ setComparisonData, setLastCompletedOn
 
   return (
     <ChartContainer>
-    <p style={{ color: 'black' }}>Last updated on: {new Date(predictionsResponse?.completed_on).toLocaleString()}</p>
+    <p style={{ color: 'black' }}>Last updated on: {new Date(predictionsResponse?.result.completed_on).toLocaleString()}</p>
       <Line data={chartData} options={options} />
     </ChartContainer>
   );  
