@@ -18,7 +18,7 @@ const Content = styled.div`
   font-size: 18x;
   color: #000; // Set text color to black
   margin: 10px auto;
-  max-width: 640px; // Adjust this value to match the desired width
+  max-width: 660px; // Adjust this value to match the desired width
   width: 100%; // Ensure it takes full available width up to the max-width
   text-align: left; // Text alignment set to left
   padding: 0 20px; // Padding to avoid text touching the container edges
@@ -48,7 +48,7 @@ export default function Home() {
       <Content>
       <br /><br />
         <div>The SARIMAX model has a Mean Absolute Error (MAE) of {predictionsResponse.result.comparison.mae_sarimax}.</div>
-        <div>Using the last observation as the prediction for the next time point results in a MAE of {predictionsResponse.result.comparison.mae_last_observation}.</div>
+        <div>Using the last observation as the prediction for the next time point has a MAE of {predictionsResponse.result.comparison.mae_last_observation}.</div>
         <div>This shows an improvement of {predictionsResponse.result.comparison.mae_comparison}% compared to the last observation method.</div><br />
         For more details, see the <StyledLink href="https://github.com/pendovka/Toronto-Shelter-Traffic/blob/main/Shelter-Demand-Predictor.ipynb" target="_blank" rel="noopener noreferrer">Jupyter notebook</StyledLink>.<br /><br />
       </Content>

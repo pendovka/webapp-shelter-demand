@@ -52,7 +52,6 @@ export default function PredictionsChart() {
   border-radius: 8px;
 `;
 
-
   const chartData = {
     labels: dates.map(date => new Date(date)),
     datasets: [
@@ -71,43 +70,29 @@ export default function PredictionsChart() {
     ],
   };
 
-  const options = {
+  const options: ChartOptions<"line"> = {
     scales: {
-        x: {
-            type: 'time',
-            time: {
-                unit: 'day',
-            },
-            title: {
-                display: true,
-                text: 'Date',
-            },
+      x: {
+        type: "time",
+        time: {
+          unit: "day",
         },
-        y: {
-            beginAtZero: true,
-            title: {
-                display: true,
-                text: 'Number of unmatched callers',
-            },
+        title: {
+          display: true,
+          text: "Date",
         },
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Number of unmatched callers",
+        },
+      },
     },
     responsive: true,
     maintainAspectRatio: false,
-    plugins: {
-        legend: {
-            position: 'top',
-            align: 'end',
-            labels: {
-                boxWidth: 150,
-                usePointStyle: true,
-                padding: 5,
-                font: {
-                    size: 12
-                }
-            }
-        }
-    },
-};
+  };
 
   return (
     <ChartContainer>
@@ -116,4 +101,3 @@ export default function PredictionsChart() {
     </ChartContainer>
   );  
 }
-
