@@ -52,6 +52,7 @@ export default function PredictionsChart() {
   border-radius: 8px;
 `;
 
+
   const chartData = {
     labels: dates.map(date => new Date(date)),
     datasets: [
@@ -107,9 +108,6 @@ export default function PredictionsChart() {
         }
     },
 };
-
-  
- 
 
   return (
     <ChartContainer>

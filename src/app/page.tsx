@@ -18,7 +18,7 @@ const Content = styled.div`
   font-size: 18x;
   color: #000; // Set text color to black
   margin: 10px auto;
-  max-width: 750px; // Adjust this value to match the desired width
+  max-width: 640px; // Adjust this value to match the desired width
   width: 100%; // Ensure it takes full available width up to the max-width
   text-align: left; // Text alignment set to left
   padding: 0 20px; // Padding to avoid text touching the container edges

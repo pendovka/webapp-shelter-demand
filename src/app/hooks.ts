@@ -28,18 +28,19 @@ export const usePredictionsData = () => {
         throw new Error("Failed to fetch");
       }
 
+      if (response.status === 202) {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        fetchPredictions();
+        
+        return;
+      }
+
       const data = await response.json();
       setPredictionsResponse(data);
-      clearInterval(interval);
     };
-
-    const interval = setInterval(() => {
-      fetchPredictions();
-    }, 2000);
 
     fetchPredictions();
 
-    return () => clearInterval(interval);
   }, []);
 
   return predictionsResponse;
