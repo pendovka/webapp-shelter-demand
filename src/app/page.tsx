@@ -47,8 +47,8 @@ export default function Home() {
       <PredictionsChart />
       <Content>
       <br /><br />
-        <div>The SARIMAX model has a Mean Absolute Error of {predictionsResponse.result.comparison.mae_sarimax}.</div>
-        <div>Using the last observation as a forecast results in a Mean Absolute Error of {predictionsResponse.result.comparison.mae_last_observation}.</div>
+        <div>The SARIMAX model has a Mean Absolute Error (MAE) of {predictionsResponse.result.comparison.mae_sarimax}.</div>
+        <div>Using the last observation as the prediction for the next time point results in a MAE of {predictionsResponse.result.comparison.mae_last_observation}.</div>
         <div>This shows an improvement of {predictionsResponse.result.comparison.mae_comparison}% compared to the last observation method.</div><br />
         For more details, see the <StyledLink href="https://github.com/pendovka/Toronto-Shelter-Traffic/blob/main/Shelter-Demand-Predictor.ipynb" target="_blank" rel="noopener noreferrer">Jupyter notebook</StyledLink>.<br /><br />
       </Content>
