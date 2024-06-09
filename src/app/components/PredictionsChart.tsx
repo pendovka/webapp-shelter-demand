@@ -96,8 +96,9 @@ export default function PredictionsChart() {
 
   return (
     <ChartContainer>
-    <p style={{ color: 'black' }}>Last updated on: {new Date (predictionsResponse.completed_on).toLocaleString('fr-fr')}</p>
-      <Line data={chartData} options={options} />
+    <p style={{ color: 'black' }}>
+      Last updated on: {new Date (Number(predictionsResponse.completed_on) * 1000 ).toLocaleString('fr-fr')}
+    </p>      <Line data={chartData} options={options} />
     </ChartContainer>
   );  
 }
