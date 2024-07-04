@@ -44,7 +44,7 @@ export default function Home() {
         The model takes into account historical data, weather effects, and shelter occupancy rates.<br /><br />
         <div>The data is released periodically depending on the source.</div>
         <div>The model will automatically recalculate once new data becomes available.</div>
-        <div>Due to the inherent delay in data release, it can only be evaluated retroactively.</div>
+        <div>Due to the inherent delay in data release, the model performance can only be evaluated retroactively.</div>
       </Content>
       <PredictionsChart />
       <Content>
