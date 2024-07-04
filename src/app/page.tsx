@@ -43,7 +43,7 @@ export default function Home() {
         It compares actual values to predictions made by a SARIMAX model, which forecasts using a daily rolling window. 
         The model takes into account historical data, weather effects, and shelter occupancy rates.<br /><br />
         <div>The data is released periodically with a natural delay depending on the source.</div>
-        <div>The model will automatically recalculate predictions once new data becomes available.</div>
+        <div>The model will automatically recalculate predictions once new data becomes available.</div> 
       </Content>
       <PredictionsChart />
       <Content>
