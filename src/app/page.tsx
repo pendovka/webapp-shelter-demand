@@ -42,9 +42,8 @@ export default function Home() {
         This chart displays the daily number of people in Toronto who were not matched to a shelter space for an overnight stay.
         It compares actual values to predictions made by a SARIMAX model, which forecasts using a daily rolling window. 
         The model takes into account historical data, weather effects, and shelter occupancy rates.<br /><br />
-        <div>The data is released periodically depending on the source.</div>
-        <div>The model will automatically recalculate once new data becomes available.</div>
-        <div>Due to the inherent delay in data release, the model performance can only be evaluated retroactively.</div>
+        <div>The data is released periodically with a natural delay depending on the source.</div>
+        <div>The model will automatically recalculate predictions once new data becomes available.</div>
       </Content>
       <PredictionsChart />
       <Content>
