@@ -43,12 +43,12 @@ export default function Home() {
         It compares actual values to predictions made by a SARIMAX model, which forecasts using a daily rolling window. 
         The model takes into account historical data, weather effects, and shelter occupancy rates.<br /><br />
         <div>The data is released periodically with a natural delay depending on the source.</div>
-        <div>The model will automatically recalculate predictions once new data becomes available.</div> 
+        <div>The model predictions and Mean Absolute Error (MAE) will automatically update as soon as new data becomes available.</div> 
       </Content>
       <PredictionsChart />
       <Content>
       <br /><br />
-        <div>The SARIMAX model has a Mean Absolute Error (MAE) of {predictionsResponse.result.comparison.mae_sarimax}.</div>
+        <div>The SARIMAX model has a MAE of {predictionsResponse.result.comparison.mae_sarimax}.</div>
         <div>Using the last observation as the prediction for the next time point has a MAE of {predictionsResponse.result.comparison.mae_last_observation}.</div>
         <div>This shows an improvement of {predictionsResponse.result.comparison.mae_comparison}% compared to the last observation method.</div><br />
         For more details, see the <StyledLink href="https://github.com/pendovka/Toronto-Shelter-Traffic/blob/main/Shelter-Demand-Predictor.ipynb" target="_blank" rel="noopener noreferrer">Jupyter notebook</StyledLink>.<br /><br />
